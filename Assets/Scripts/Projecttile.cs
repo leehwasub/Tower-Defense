@@ -6,11 +6,13 @@ public class Projecttile : MonoBehaviour
 {
     private Movement2D movement2D;
     private Transform target;
+    private float damage;
 
-    public void Setup(Transform target)
+    public void Setup(Transform target, float damage)
     {
         movement2D = GetComponent<Movement2D>();
         this.target = target; //타워가 설정해준 target
+        this.damage = damage; //타워가 설정해준 공격력
     }
 
     void Update()
@@ -29,12 +31,11 @@ public class Projecttile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("onTriggerEnter2D");
         if (!collision.CompareTag("Enemy")) return; // 적이 아닌 대상과 부딪히면
         if (collision.transform != target) return; //현재 target인 적이 아닐 때
 
-        Debug.Log("죽음");
-        collision.GetComponent<Enemy>().OnDie(); //적 사망 함수호출
+        //collision.GetComponent<Enemy>().OnDie(); //적 사망 함수호출
+        collision.GetComponent<EnemyHP>().TakeDamage(damage); //적 체력을 damage만큼 감소
         Destroy(gameObject); //발사체 오브젝트 삭제
     }
 }
