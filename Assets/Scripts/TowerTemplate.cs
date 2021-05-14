@@ -18,6 +18,8 @@ public class TowerTemplate : ScriptableObject
         [SerializeField]
         private float damage; // 공격력
         [SerializeField]
+        private float slow; // 감속 퍼센트 (0.2 = 20%)
+        [SerializeField]
         private float rate; // 공격 속도
         [SerializeField]
         private float range; // 공격 범위
@@ -32,6 +34,7 @@ public class TowerTemplate : ScriptableObject
         public float Range => range;
         public int Cost => cost;
         public int Sell => sell;
+        public float Slow => slow;
     }
 
 }
